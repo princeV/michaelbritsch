@@ -1,0 +1,90 @@
+//define menu colors:
+$vn-navbar-text-color: black;
+$vn-navbar-text-hover-color: #999999;
+$vn-navbar-background-color: #e1e1e1;
+$vn-navbar-bg-color:white;
+
+//navbar background color:
+$navbar-inverse-bg: $vn-navbar-bg-color;
+//navbar text color - Home Text
+$navbar-inverse-brand-color: $vn-navbar-text-color;
+$navbar-inverse-brand-hover-color: $vn-navbar-text-hover-color;
+$navbar-inverse-brand-hover-bg: $vn-navbar-bg-color;
+
+//navbar item color
+$navbar-inverse-link-color: $vn-navbar-text-color;
+$navbar-inverse-link-hover-color: $vn-navbar-text-hover-color;
+$navbar-inverse-link-hover-bg: $vn-navbar-bg-color;
+$navbar-inverse-link-active-color: $vn-navbar-text-color;
+$navbar-inverse-link-active-bg:$vn-navbar-bg-color;
+$navbar-inverse-link-disabled-color: $vn-navbar-text-color;
+$navbar-inverse-link-disabled-bg:$vn-navbar-bg-color;
+
+//navbar toggle (smartphone menu)
+$navbar-inverse-toggle-hover-bg: #d0d0d0;
+$navbar-inverse-toggle-icon-bar-bg: $vn-navbar-text-color;
+
+$navbar-inverse-color: $vn-navbar-text-color;
+
+
+@import "public/lib/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+.navbar{
+  background-image: none;
+ // background-color: $vn-navbar-background-color;
+
+}
+
+/* Main navbar settings here */
+.navbar-inverse {
+//  font-family: Georgia, serif;
+//  font-size: 17px;
+//  min-height: 80px;
+  .navbar-brand,
+  .navbar-nav > li > a {
+    text-shadow: none;
+  }
+  .navbar-brand {
+    &:link,
+    &:visited{
+      color: $vn-navbar-text-color;
+    }
+    &:hover {
+      color: $vn-navbar-text-hover-color;
+    }
+    &:focus{
+      color: $vn-navbar-text-color;
+    }
+    &:active{
+      color: $vn-navbar-text-hover-color;
+    }
+  }
+
+  .navbar-toggle {
+    border-color: $navbar-inverse-toggle-border-color;
+    &:link,
+    &:visited{
+      background-color: $vn-navbar-bg-color;
+    }
+    &:hover {
+      background-color: $navbar-inverse-toggle-hover-bg;
+    }
+    &:focus{
+      background-color: $vn-navbar-bg-color;
+    }
+    &:active{
+      background-color: $navbar-inverse-toggle-hover-bg;
+    }
+
+  }
+
+  border-bottom: 1px dashed #000000;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .active > a {
+  background-image: none;
+  @include box-shadow(none);
+}
+
+@import "carousel";

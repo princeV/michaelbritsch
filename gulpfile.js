@@ -93,12 +93,17 @@ gulp.task('cssmin', function () {
 
 // Sass task
 gulp.task('sass', function () {
-	return gulp.src(defaultAssets.client.sass)
+	//process.stdout.write(path);
+	var returncode =
+	gulp.src(defaultAssets.client.sass)
 		.pipe(plugins.sass())
 		.pipe(plugins.rename(function (path) {
-			path.dirname = path.dirname.replace('/scss', '/css');
+			path.dirname = path.dirname.replace('scss', 'css');
+			process.stdout.write(path.dirname);
 		}))
 		.pipe(gulp.dest('./modules/'));
+
+	return returncode;
 });
 
 // Less task
@@ -106,7 +111,7 @@ gulp.task('less', function () {
 	return gulp.src(defaultAssets.client.less)
 		.pipe(plugins.less())
 		.pipe(plugins.rename(function (path) {
-			path.dirname = path.dirname.replace('/less', '/css');
+			path.dirname = path.dirname.replace('less', 'css');
 		}))
 		.pipe(gulp.dest('./modules/'));
 });

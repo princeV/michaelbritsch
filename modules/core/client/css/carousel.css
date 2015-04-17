@@ -1,0 +1,13 @@
+.angular-carousel {
+  background-color: #ffffff; }
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  max-height: 723px; }
+
+.carousel-control {
+  color: #000000; }
+  .carousel-control.right, .carousel-control.left {
+    background-image: none;
+    background-repeat: no-repeat; }
