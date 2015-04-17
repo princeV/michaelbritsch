@@ -1,7 +1,7 @@
 {
   "name": "meanjs",
   "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": false,
   "author": "https://github.com/meanjs/mean/graphs/contributors",
   "repository": {
@@ -15,7 +15,7 @@
   "scripts": {
     "start": "grunt",
     "test": "grunt test",
-    "postinstall": "bower install --config.interactive=false"
+    "postinstall": "bower cache clean && bower install --config.interactive=false"
   },
   "dependencies": {
     "acl": "~0.4.4",
