@@ -3,9 +3,30 @@ $vn-navbar-text-color: black;
 $vn-navbar-text-hover-color: #999999;
 $vn-navbar-background-color: #e1e1e1;
 $vn-navbar-bg-color:white;
+
+//navbar background color:
+$navbar-inverse-bg: $vn-navbar-bg-color;
+//navbar text color - Home Text
+$navbar-inverse-brand-color: $vn-navbar-text-color;
+$navbar-inverse-brand-hover-color: $vn-navbar-text-hover-color;
+$navbar-inverse-brand-hover-bg: $vn-navbar-bg-color;
+
+//navbar item color
+$navbar-inverse-link-color: $vn-navbar-text-color;
+$navbar-inverse-link-hover-color: $vn-navbar-text-hover-color;
+$navbar-inverse-link-hover-bg: $vn-navbar-bg-color;
+$navbar-inverse-link-active-color: $vn-navbar-text-color;
+$navbar-inverse-link-active-bg:$vn-navbar-bg-color;
+$navbar-inverse-link-disabled-color: $vn-navbar-text-color;
+$navbar-inverse-link-disabled-bg:$vn-navbar-bg-color;
+
 //navbar toggle (smartphone menu)
 $navbar-inverse-toggle-hover-bg: #d0d0d0;
-$navbar-inverse-toggle-border-color: black;
+$navbar-inverse-toggle-icon-bar-bg: $vn-navbar-text-color;
+
+$navbar-inverse-color: $vn-navbar-text-color;
+
+@import "public/lib/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
 .navbar{
   background-image: none;
