@@ -138,7 +138,7 @@ module.exports = function (grunt) {
 					src: defaultAssets.client.sass,
 					ext: '.css',
 					rename: function(base, src) {
-						return  src.replace('/scss/', '/css/');
+						return  src.replace('scss', 'css');
 					}
 				}]
 			}
