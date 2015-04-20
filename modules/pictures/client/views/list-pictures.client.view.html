@@ -5,44 +5,32 @@
     </div>
     -->
     <!-- Carousel  -->
-    <div data-ng-controller="CarouselDemoCtrl">
-        <div class="angular-carousel">
-            <carousel interval="myInterval">
-                <slide ng-repeat="slide in slides" active="slide.active">
-                    <img ng-src="{{slide.image}}" style="margin:auto;">
-                    <div class="carousel-caption">
-                        <h4>Slide {{$index}}</h4>
-                        <p>{{slide.text}}</p>
-                    </div>
-                </slide>
-            </carousel>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
-            </div>
-            <div class="col-md-6">
-                Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
-                <br />Enter a negative number or 0 to stop the interval.
-            </div>
-        </div>
+    <div class="angular-carousel">
+        <carousel interval="myInterval">
+            <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h5>{{slide.text}}</h5>
+                </div>
+            </slide>
+        </carousel>
     </div>
     <!-- Carousel  -->
 
+    <!-- thumbnails -->
+
     <div class="list-group">
         <a data-ng-repeat="picture in pictures" data-ng-href="/#!/pictures/{{picture._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="picture.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="picture.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="picture.name"></h4>
+            <small class="list-group-item-text">
+                Posted on
+                <span data-ng-bind="picture.created | date:'medium'"></span>
+                by
+                <span data-ng-bind="picture.user.displayName"></span>
+            </small>
+            <h4 class="list-group-item-heading" data-ng-bind="picture.name"></h4>
         </a>
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!pictures.$resolved || pictures.length">
-    	No Pictures yet, why don't you <a href="/#!/pictures/create">create one</a>?
-    </div>
+
 </section>
 
 

@@ -2,22 +2,124 @@
     <div class="page-header">
         <h1>New Picture</h1>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+    <div class="row">
+        <div class="col-md-12">
+
+            <form class="form-horizontal" data-ng-submit="fetchFlickrData()">
+                <fieldset>
+                    <div class="form-group">
+                        <!-- NAME of the picture-->
+                        <label class="control-label" for="name">Name</label>
+
+                        <div class="controls">
+                            <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name"
+                                   required>
+                        </div>
+                        <!-- Description of the picture-->
+                        <label class="control-label" for="description">Description</label>
+
+                        <div class="controls">
+                        <textarea rows="3" data-ng-model="description" id="description" class="form-control"
+                                  placeholder="Description" required>
+                        </textarea>
+                        </div>
+                        <!-- flickr link of the picture-->
+                        <label class="control-label" for="flickrLink">Flickr Link (shortform)</label>
+
+                        <div class="controls">
+                            <input type="text" data-ng-model="flickrLink" id="flickrLink" class="form-control"
+                                   placeholder="https://flic.kr/p/rRERw5" required>
+                        </div>
+
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-default">
+                    </div>
+                    <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div collapse="flickrSuccess">
+        <h2>Flickr picture validation</h2>
+
+        <h3>Preview:</h3>
+
+        <div data-ng-show="flickrSmallIsAvailable">
+            <img data-ng-src={{flickrSmallSource}} class="img-rounded">
+        </div>
+
+        <h3>Availability:</h3>
+
+        <div data-ng-show="flickrSquareIsAvailable">
+            <div class="alert alert-success" role="alert">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                Square size image is available.
+            </div>
+        </div>
+
+        <div data-ng-hide="flickrSquareIsAvailable">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                Square size image is not available.
+            </div>
+        </div>
+
+        <div data-ng-show="flickrSmallIsAvailable">
+            <div class="alert alert-success" role="alert">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                Small size image is available.
+            </div>
+        </div>
+        <div data-ng-hide="flickrSmallIsAvailable">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                Small size image is not available.
+            </div>
+        </div>
+
+        <div data-ng-show="flickrMediumIsAvailable">
+            <div class="alert alert-success" role="alert">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                Medium size image is available.
+            </div>
+        </div>
+        <div data-ng-hide="flickrMediumIsAvailable">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                Medium size image is not available.
+            </div>
+        </div>
+
+        <div data-ng-show="flickrLargeIsAvailable">
+            <div class="alert alert-success" role="alert">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                Large size image is available.
+            </div>
+        </div>
+        <div data-ng-hide="flickrLargeIsAvailable">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                Large size image is not available.
+            </div>
+        </div>
+
+        <div data-ng-show="flickrOriginalIsAvailable">
+            <div class="alert alert-success" role="alert">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                Original size image is available.
+            </div>
+        </div>
+
+        <div data-ng-hide="flickrOriginalIsAvailable">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                Original size image is not available.
+            </div>
+        </div>
+        <button class="btn btn-default" type="submit" data-ng-click="create()">Create Picture</button>
     </div>
 </section>

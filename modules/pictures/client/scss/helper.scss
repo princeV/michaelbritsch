@@ -1,0 +1,17 @@
+/* centered columns styles */
+.row-centered {
+  text-align:center;
+  /* inline-block space fix */
+  margin-left: -38px;
+}
+.col-centered {
+  display:inline-block;
+  float:none;
+  /* reset the text-align */
+  text-align:center;
+
+}
+.col-fixed {
+  /* custom width */
+  width:75px + 10px;
+}
