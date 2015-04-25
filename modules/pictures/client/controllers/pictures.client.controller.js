@@ -174,15 +174,23 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
             var i;
             var j;
             for (i = 0; i < $scope.pictures.length; i++) {
+                var slideAttributes = [];
+                slideAttributes.name = $scope.pictures[i].name;
+
+
                 for (j = 0; j < $scope.pictures[i].sizes.length; j++) {
                     var text = $scope.pictures[i].description;
                     if ($scope.pictures[i].sizes[j].label === 'Large') {
-                        slides.push({
-                            image: $scope.pictures[i].sizes[j].source,
-                            text: text
-                        });
+                        slideAttributes.largeImg =  $scope.pictures[i].sizes[j].source;
+                    }
+                    else if ($scope.pictures[i].sizes[j].label === 'Medium 640') {
+                        slideAttributes.mediumImg =  $scope.pictures[i].sizes[j].source;
+                    }
+                    else if ($scope.pictures[i].sizes[j].label === 'Square') {
+                        slideAttributes.squareImg =  $scope.pictures[i].sizes[j].source;
                     }
                 }
+                slides.push(slideAttributes);
             }
         };
 

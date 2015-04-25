@@ -1,0 +1,22 @@
+<section data-ng-controller="AppointmentsController" data-ng-init="find()">
+    <div class="page-header">
+        <h2><strong>R</strong>eferenzen</h2>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="appointment in appointments" data-ng-href="/#!/appointments/{{appointment._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Erstellt am
+				<span data-ng-bind="appointment.created | date:'medium'"></span>
+				von
+				<span data-ng-bind="appointment.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="appointment.name"></h4>
+            <h5 class="list-group-item-heading" data-ng-bind="appointment.description"></h5>
+            <h5 class="list-group-item-heading" data-ng-bind="appointment.location"></h5>
+            <h5 class="list-group-item-heading" data-ng-bind="appointment.date | date:'dd.MM.yyyy' "></h5>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!appointments.$resolved || appointments.length">
+    	No Appointments yet, why don't you <a href="/#!/appointments/create">create one</a>?
+    </div>
+</section>

@@ -33,7 +33,7 @@
 				<a data-ui-sref="authentication.signin" target="_self">Sign In</a>
 			</li>
 		</ul>
-		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user" data-ng-click="checkUserRoles()">
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle user-header-dropdown-toggle" data-toggle="dropdown">
 					<img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image"/>
@@ -52,10 +52,15 @@
 					<li data-ui-sref-active="active">
 						<a data-ui-sref="settings.accounts">Manage Social Accounts</a>
 					</li>
+					<li class="divider" data-ng-show="userIsAdmin"></li>
+					<li data-ui-sref-active="active" data-ng-show="userIsAdmin">
+						<a data-ui-sref="settings.admin">Administration</a>
+					</li>
 					<li class="divider"></li>
 					<li>
 						<a href="/api/auth/signout" target="_self">Signout</a>
 					</li>
+
 				</ul>
 			</li>
 		</ul>

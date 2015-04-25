@@ -13,3 +13,50 @@
 .col-fixed {
   /* custom width */
   width: 85px; }
+
+.slick-prev:before, .slick-next:before {
+  color: #6e6e6e !important; }
+
+.slider-nav {
+  left: 50%;
+  transform: translate(-50%, 0); }
+  @media (min-width: 1200px) {
+    .slider-nav {
+      width: 30%; } }
+  @media (min-width: 990px) and (max-width: 1199px) {
+    .slider-nav {
+      width: 42%; } }
+  @media (min-width: 650px) and (max-width: 989px) {
+    .slider-nav {
+      width: 60%; } }
+  @media (max-width: 549px) {
+    .slider-nav {
+      width: 80%; } }
+
+.slick-slide-vn {
+  display: block;
+  width: 100%;
+  position: relative; }
+  .slick-slide-vn:after {
+    padding-top: 55%;
+    /*for containers ratio*/
+    display: block;
+    content: ''; }
+  .slick-slide-vn:before {
+    content: '';
+    display: block;
+    height: 100%; }
+  .slick-slide-vn img {
+    display: block;
+    width: auto;
+    max-height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0); }
+
+/* Set the size of the prev and next buttons */
+.slick-prev, .slick-next {
+  width: 40px;
+  height: 40px; }
+  .slick-prev:before, .slick-next:before {
+    font-size: 30px; }
