@@ -5,7 +5,7 @@ var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'MichaelBritsch';
 
-	var applicationModuleVendorDependencies = ['ngResource', 'ui.router', 'ui.bootstrap', 'ui.utils', 'angularFileUpload', 'ngTouch', 'slick'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ui.router', 'ui.bootstrap', 'ui.utils', 'angularFileUpload', 'ngTouch', 'slick', 'textAngular'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

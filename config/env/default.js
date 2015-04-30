@@ -3,7 +3,7 @@
 
 module.exports = {
 	app: {
-		title: 'MichaelBritsch',
+		title: 'Michael Britsch',
 		description: 'Regisseur',
 		keywords: 'Regisseur',
 		googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'

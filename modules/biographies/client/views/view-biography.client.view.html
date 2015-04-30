@@ -1,0 +1,30 @@
+<section data-ng-controller="BiographiesController" data-ng-init="find()">
+    <div class="page-header">
+        <h2 data-ng-bind="biography.name"></h2>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div ta-bind data-ng-model="biography.htmlContent"></div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="pull-right" data-ng-show="authentication.user.roles.indexOf('admin') > -1">
+        <a class="btn btn-primary" href="/#!/biographies/{{biography._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <small>
+        <em class="text-muted">
+            Updated on
+            <span data-ng-bind="biography.changed | date:'medium'"></span>
+            by
+            <span data-ng-bind="biography.user.displayName"></span>
+        </em>
+    </small>
+</section>
+
+

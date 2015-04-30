@@ -1,0 +1,34 @@
+<section data-ng-controller="PicturesController" data-ng-init="find()">
+
+    <br/>
+
+    <!-- Carousel  -->
+    <slick class="slider-for" slides-to-show=1 slides-to-scroll=1 arrows="false" as-nav-for=".slider-nav"
+           init-onload=true data="slides">
+        <div ng-repeat="picture in pictures" class="slick-slide-vn">
+            <img ng-src={{getSourceBySize('Large',picture)}}>
+        </div>
+    </slick>
+
+    <slick class="slider-nav" slides-to-show=3 slides-to-scroll=1 as-nav-for=".slider-for" dots="true"
+           center-mode="true" focus-on-select="true" init-onload=true data="slides">
+        <div ng-repeat="picture in pictures">
+            <img ng-src={{getSourceBySize('Square',picture)}}>
+        </div>
+    </slick>
+    <br/>
+
+    <div data-ng-show="authentication.user.roles.indexOf('admin') > -1">
+        <hr>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="/#!/pictures/list">
+                <i class="glyphicon glyphicon-list"></i>
+            </a>
+            <a class="btn btn-primary" href="/#!/pictures/create">
+                <i class="glyphicon glyphicon-plus-sign"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+

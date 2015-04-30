@@ -8,6 +8,8 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/slick-carousel/slick/slick.css',
 				'public/lib/slick-carousel/slick/slick-theme.css',
+				'public/lib/textAngular/src/textAngular.css',
+				'public/lib/font-awesome/css/font-awesome.css',
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -20,7 +22,13 @@ module.exports = {
 				'public/lib/angular-file-upload/angular-file-upload.js',
 				'public/lib/angular-touch/angular-touch.js',
 				'public/lib/angular-slick/dist/slick.js',
-				'public/lib/slick-carousel/slick/slick.js'
+				'public/lib/slick-carousel/slick/slick.js',
+				'public/lib/rangy/rangy-core.js',
+				'public/lib/rangy/rangy-serializer.js',
+				'public/lib/rangy/rangy-selectionsaverestore.js',
+				'public/lib/textAngular/src/textAngular-sanitize.js',
+				'public/lib/textAngular/src/textAngular.js',
+				'public/lib/textAngular/src/textAngularSetup.js'
 			],
 			tests: ['public/lib/angular-mocks/angular-mocks.js']
 		},

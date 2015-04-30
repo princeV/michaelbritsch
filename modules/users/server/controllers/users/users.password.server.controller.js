@@ -67,7 +67,18 @@ exports.forgot = function(req, res, next) {
 		},
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
-			var smtpTransport = nodemailer.createTransport(config.mailer.options);
+			console.log('test');
+			var smtpTransport = nodemailer.createTransport({
+				host: config.mailer.options.host,
+				port: config.mailer.options.port,
+				auth: {
+					user: config.mailer.options.auth.user,
+					pass: config.mailer.options.auth.pass
+			},
+			tls: {rejectUnauthorized: false},
+			debug:true
+		});
+			//config.mailer.options);
 			var mailOptions = {
 				to: user.email,
 				from: config.mailer.from,
@@ -79,6 +90,9 @@ exports.forgot = function(req, res, next) {
 					res.send({
 						message: 'An email has been sent to ' + user.email + ' with further instructions.'
 					});
+				}
+				else{
+					console.log(err);
 				}
 
 				done(err);
@@ -114,7 +128,6 @@ exports.reset = function(req, res, next) {
 	// Init Variables
 	var passwordDetails = req.body;
 	var message = null;
-
 	async.waterfall([
 
 		function(done) {

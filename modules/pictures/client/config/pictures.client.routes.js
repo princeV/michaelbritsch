@@ -10,13 +10,17 @@ angular.module('pictures').config(['$stateProvider',
 			url: '/pictures',
 			template: '<ui-view/>'
 		}).
-		state('pictures.list', {
+		state('pictures.slick', {
 			url: '',
-			templateUrl: 'modules/pictures/views/list-pictures.client.view.html'
+			templateUrl: 'modules/pictures/views/slick-pictures.client.view.html'
 		}).
 		state('pictures.create', {
 			url: '/create',
 			templateUrl: 'modules/pictures/views/create-picture.client.view.html'
+		}).
+		state('pictures.list', {
+			url: '/list',
+			templateUrl: 'modules/pictures/views/list-pictures.client.view.html'
 		}).
 		state('pictures.view', {
 			url: '/:pictureId',

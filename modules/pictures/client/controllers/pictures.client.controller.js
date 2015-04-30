@@ -9,6 +9,16 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
         $scope.flickrLink = '';
         $scope.flickrSuccess = true;
 
+        // function that returns the source of the picture in the required size
+        $scope.getSourceBySize = function(sizeLabel, picture){
+
+            for (var key in picture.sizes){
+                if (picture.sizes[key].label === sizeLabel) {
+                    return picture.sizes[key].source;
+                }
+            }
+        };
+
         $scope.fetchFlickrData = function () {
             //create a new pictures object:
             $scope.picture = new Pictures({
@@ -176,7 +186,6 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
             for (i = 0; i < $scope.pictures.length; i++) {
                 var slideAttributes = [];
                 slideAttributes.name = $scope.pictures[i].name;
-
 
                 for (j = 0; j < $scope.pictures[i].sizes.length; j++) {
                     var text = $scope.pictures[i].description;

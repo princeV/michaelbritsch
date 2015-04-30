@@ -2,52 +2,56 @@
     <div class="page-header">
         <h2><strong>R</strong>eferenz anlegen</h2>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+    <div class="row">
 
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name"
-                               required>
-                    </div>
 
-                    <label class="control-label" for="description">Description</label>
+        <div class="col-md-12">
+            <form class="form-horizontal" data-ng-submit="create()" novalidate>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="control-label" for="name">Name</label>
 
-                    <div class="controls">
-                        <input type="text" data-ng-model="description" id="description" class="form-control"
-                               placeholder="Description">
-                    </div>
+                        <div class="controls">
+                            <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name"
+                                   required>
+                        </div>
 
-                    <label class="control-label" for="location">Location</label>
+                        <label class="control-label" for="description">Description</label>
 
-                    <div class="controls">
-                        <input type="text" data-ng-model="location" id="location" class="form-control"
-                               placeholder="Location">
-                    </div>
+                        <div class="controls">
+                            <input type="text" data-ng-model="description" id="description" class="form-control"
+                                   placeholder="Description">
+                        </div>
 
-                    <label class="control-label" for="location">Date</label>
+                        <label class="control-label" for="location">Location</label>
 
-                    <div class="controls">
-                        <p class="input-group">
-                            <input type="text" class="form-control" datepicker-popup="{{format}}"
-                                   data-ng-model="date" is-open="opened" datepicker-options="dateOptions"
-                                   close-text="Close"/>
+                        <div class="controls">
+                            <input type="text" data-ng-model="location" id="location" class="form-control"
+                                   placeholder="Location">
+                        </div>
+
+                        <label class="control-label" for="location">Date</label>
+
+                        <div class="controls">
+                            <p class="input-group">
+                                <input type="text" class="form-control" datepicker-popup="{{format}}"
+                                       data-ng-model="date" is-open="opened" datepicker-options="dateOptions"
+                                       close-text="Close"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
                             </span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-default">
-                </div>
-                <div data-ng-show="error" class="text-danger">
-                    <strong data-ng-bind="error"></strong>
-                </div>
-            </fieldset>
-        </form>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-default">
+                    </div>
+                    <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
 </section>
