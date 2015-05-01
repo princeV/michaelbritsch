@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://michael_brtisch:DMweHh!1!@ds061611.mongolab.com:61611/michael_brtisch',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/michaelbritsch',
 	app: {
 		title: 'Michael Britsch - Development Environment'
 	},
