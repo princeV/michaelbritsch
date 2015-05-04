@@ -1,12 +1,17 @@
 <section data-ng-controller="PicturesController" data-ng-init="find()">
 
-    <br/>
-
+    <br />
     <!-- Carousel  -->
     <slick class="slider-for" slides-to-show=1 slides-to-scroll=1 arrows="false" as-nav-for=".slider-nav"
            init-onload=true data="slides">
         <div ng-repeat="picture in pictures" class="slick-slide-vn">
-            <img ng-src={{getSourceBySize('Large',picture)}}>
+           <!-- <div class="page-header">
+                <h2>{{picture.name}} <small>{{picture.description}}</small></h2>
+            </div>
+            -->
+            <a data-ng-href="{{picture.linkToHost}}" target="_blank">
+                <img ng-src={{getSourceBySize('Large',picture)}}>
+            </a>
         </div>
     </slick>
 

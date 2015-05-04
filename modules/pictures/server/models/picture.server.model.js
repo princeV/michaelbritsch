@@ -22,6 +22,12 @@ var PictureSchema = new Schema({
         required: 'Please fill Picture description',
         trim: true
     },
+    linkToHost: {
+        type: String,
+        default: '',
+        required: 'Please fill link to host',
+        trim: true
+    },
     sizes: [{
         label: {
             type: String,

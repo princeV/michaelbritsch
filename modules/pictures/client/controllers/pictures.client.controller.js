@@ -6,13 +6,14 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
         $scope.authentication = Authentication;
         $scope.picture = null;
         $scope.flickrPictureId = 0;
-        $scope.flickrLink = '';
+        $scope.linkToHost = '';
         $scope.flickrSuccess = true;
+        $scope.sizes = [];
 
         // function that returns the source of the picture in the required size
-        $scope.getSourceBySize = function(sizeLabel, picture){
+        $scope.getSourceBySize = function (sizeLabel, picture) {
 
-            for (var key in picture.sizes){
+            for (var key in picture.sizes) {
                 if (picture.sizes[key].label === sizeLabel) {
                     return picture.sizes[key].source;
                 }
@@ -20,12 +21,10 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
         };
 
         $scope.fetchFlickrData = function () {
-            //create a new pictures object:
-            $scope.picture = new Pictures({
-                name: this.name,
-                description: this.description,
-                sizes: []
-            });
+            // set the linkToHost to the current picture linkToHost in case of an update
+            if ($scope.picture !== null) {
+                $scope.linkToHost = $scope.picture.linkToHost;
+            }
 
             //initialize variables:
             $scope.flickrSuccess = true;
@@ -35,17 +34,16 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
             $scope.flickrMediumIsAvailable = false;
             $scope.flickrLargeIsAvailable = false;
             $scope.flickrOriginalIsAvailable = false;
+            $scope.sizes = [];
 
             //check the flickr bbcode
-            checkFlickrBBcode();
-
+            var flickrPictureId = checkFlickrBBcode($scope.linkToHost);
             var host = 'https://api.flickr.com';
             var path = '/services/rest/';
             var method = 'flickr.photos.getSizes';
             var apiKey = 'e52b35ac4e8f7389ec81840ff2497704';
-            var id = $scope.flickrPictureId;
             var format = 'json&nojsoncallback=1';
-            var fullUrl = host.concat(path, '?method=', method, '&api_key=', apiKey, '&photo_id=', id, '&format=', format);
+            var fullUrl = host.concat(path, '?method=', method, '&api_key=', apiKey, '&photo_id=', flickrPictureId, '&format=', format);
 
             // Simple GET request example :
             $http.get(fullUrl).
@@ -56,7 +54,7 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
                         var index = 0;
                         for (index = 0; index < data.sizes.size.length; index++) {
                             //add the required fields to the picture object
-                            $scope.picture.sizes.push(
+                            $scope.sizes.push(
                                 {
                                     label: data.sizes.size[index].label,
                                     source: data.sizes.size[index].source,
@@ -114,9 +112,10 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
                 });
         };
 
-        var checkFlickrBBcode = function () {
+        var checkFlickrBBcode = function (flickrUrl) {
 
-            var flickrUrlId = $scope.flickrLink.replace('https://flic.kr/p/', '');
+            var flickrUrlId = flickrUrl.replace('https://flic.kr/p/', '');
+            //$scope.linkToHost.replace('https://flic.kr/p/', '');
 
             var alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
             var num = flickrUrlId.length;
@@ -126,18 +125,25 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
                 decoded = decoded + multi * alphabet.indexOf(flickrUrlId[i]);
                 multi = multi * alphabet.length;
             }
-            $scope.flickrPictureId = decoded;
+            return decoded;
 
         };
 
         // Create new Picture
         $scope.create = function () {
             // Create new Picture object
-            var picture = $scope.picture;
+            // var picture = $scope.picture;
+
+            var picture = new Pictures({
+                name: this.name,
+                description: this.description,
+                linkToHost: this.linkToHost,
+                sizes: $scope.sizes
+            });
 
             // Redirect after save
             picture.$save(function (response) {
-                $location.path('pictures/' + response._id);
+                $location.path('pictures');
 
                 // Clear form fields
                 $scope.name = '';
@@ -167,8 +173,13 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
         $scope.update = function () {
             var picture = $scope.picture;
 
+
+
+            // Update the sizes of the picture:
+            picture.sizes = $scope.sizes;
+
             picture.$update(function () {
-                $location.path('pictures/' + picture._id);
+                $location.path('pictures/list');
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
@@ -179,7 +190,7 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
             $scope.pictures = Pictures.query(initializeSlides);
         };
 
-        var initializeSlides = function(pictureResults){
+        var initializeSlides = function (pictureResults) {
             var slides = $scope.slides = [];
             var i;
             var j;
@@ -190,13 +201,13 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
                 for (j = 0; j < $scope.pictures[i].sizes.length; j++) {
                     var text = $scope.pictures[i].description;
                     if ($scope.pictures[i].sizes[j].label === 'Large') {
-                        slideAttributes.largeImg =  $scope.pictures[i].sizes[j].source;
+                        slideAttributes.largeImg = $scope.pictures[i].sizes[j].source;
                     }
                     else if ($scope.pictures[i].sizes[j].label === 'Medium 640') {
-                        slideAttributes.mediumImg =  $scope.pictures[i].sizes[j].source;
+                        slideAttributes.mediumImg = $scope.pictures[i].sizes[j].source;
                     }
                     else if ($scope.pictures[i].sizes[j].label === 'Square') {
-                        slideAttributes.squareImg =  $scope.pictures[i].sizes[j].source;
+                        slideAttributes.squareImg = $scope.pictures[i].sizes[j].source;
                     }
                 }
                 slides.push(slideAttributes);
