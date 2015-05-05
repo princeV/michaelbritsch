@@ -4,7 +4,7 @@
         <div class="col-md-4">
             <section data-ng-controller="AppointmentsController" data-ng-init="find()">
                 <div class="page-header">
-                    <h2><strong>T</strong>ermine/Aktuelles</h2>
+                    <vn-first-strong input-text="Termine/Aktuelles"></vn-first-strong>
                 </div>
                 <div class="list-group">
                     <a data-ng-repeat="appointment in appointments|filter:isInFuture|limitTo:4" data-ng-href="/#!/appointments/{{appointment._id}}" class="list-group-item">
@@ -19,9 +19,8 @@
         </div>
         <div class="col-md-8">
             <div class="page-header">
-                <h2><strong>W</strong>eitere Informationen</h2>
+                <vn-first-strong input-text="Weitere Informationen"></vn-first-strong>
             </div>
-
         </div>
     </div>
 </section>
