@@ -1,4 +1,5 @@
-FROM dockerfile/nodejs
+#FROM dockerfile/nodejs
+FROM node:0.10.38
 
 MAINTAINER Matthias Luebken, matthias@catalyst-zero.com
 
