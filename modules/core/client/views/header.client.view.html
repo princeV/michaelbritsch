@@ -26,39 +26,35 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li data-ui-sref-active="active">
-				<a data-ui-sref="authentication.signup" target="_self">Sign Up</a>
+				<a data-ui-sref="authentication.signup" target="_self">Neu anmelden</a>
 			</li>
 			<li class="divider-vertical"></li>
 			<li data-ui-sref-active="active">
-				<a data-ui-sref="authentication.signin" target="_self">Sign In</a>
+				<a data-ui-sref="authentication.signin" target="_self">Einloggen</a>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user" data-ng-click="checkUserRoles()">
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle user-header-dropdown-toggle" data-toggle="dropdown">
-					<img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image"/>
+					<!-- remove picture for now -->
+					<!--<img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image"/>-->
 					<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
 					<li data-ui-sref-active="active">
-						<a data-ui-sref="settings.profile">Edit Profile</a>
+						<a data-ui-sref="settings.profile">Profil bearbeiten</a>
 					</li>
+					<!--
 					<li data-ui-sref-active="active">
 						<a data-ui-sref="settings.picture">Change Profile Picture</a>
 					</li>
+					-->
 					<li data-ui-sref-active="active" data-ng-show="authentication.user.provider === 'local'">
-						<a data-ui-sref="settings.password">Change Password</a>
-					</li>
-					<li data-ui-sref-active="active">
-						<a data-ui-sref="settings.accounts">Manage Social Accounts</a>
-					</li>
-					<li class="divider" data-ng-show="userIsAdmin"></li>
-					<li data-ui-sref-active="active" data-ng-show="userIsAdmin">
-						<a data-ui-sref="settings.admin">Administration</a>
+						<a data-ui-sref="settings.password">Passwort &auml;ndern</a>
 					</li>
 					<li class="divider"></li>
 					<li>
-						<a href="/api/auth/signout" target="_self">Signout</a>
+						<a href="/api/auth/signout" target="_self">abmelden</a>
 					</li>
 
 				</ul>

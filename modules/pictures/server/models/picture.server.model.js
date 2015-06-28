@@ -22,13 +22,18 @@ var PictureSchema = new Schema({
         required: 'Please fill Picture description',
         trim: true
     },
-    linkToHost: {
+    fileName: {
         type: String,
         default: '',
-        required: 'Please fill link to host',
+        required: 'Please fill file-name',
         trim: true
     },
     sizes: [{
+        files_id:{
+            type: String,
+            default: '',
+            trim: true
+        },
         label: {
             type: String,
             default: '',

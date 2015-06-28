@@ -1,6 +1,6 @@
 'use strict';
 
-// Biographies controller
+// Biographies controller - add dependency to core as we want to reuse the directive for capitalization
 angular.module('biographies').controller('BiographiesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Biographies',
 	function($scope, $stateParams, $location, Authentication, Biographies ) {
 		$scope.authentication = Authentication;
@@ -15,7 +15,7 @@ angular.module('biographies').controller('BiographiesController', ['$scope', '$s
 
 			// Redirect after save
 			biography.$save(function(response) {
-				$location.path('biographies/' + response._id);
+				$location.path('biografie');
 
 				// Clear form fields
 				$scope.name = '';
@@ -36,7 +36,7 @@ angular.module('biographies').controller('BiographiesController', ['$scope', '$s
 				}
 			} else {
 				$scope.biography.$remove(function() {
-					$location.path('biographies');
+					$location.path('/');
 				});
 			}
 		};
@@ -47,21 +47,23 @@ angular.module('biographies').controller('BiographiesController', ['$scope', '$s
 			biography.changed = new Date();
 
 			biography.$update(function() {
-				$location.path('biographies/' + biography._id);
+				$location.path('biografie');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
 
-		// Find a list of Biographies
-		$scope.find = function() {
+		// Find the first Biography
+		$scope.findFirst = function() {
 			$scope.biographies = Biographies.query(function(biographyResults){
 				//set the first to be the active biography:
 				$scope.biography = biographyResults[0];
 			});
+		};
 
-
-
+		// Find a list of Biographies
+		$scope.find = function() {
+			$scope.biographies = Biographies.query();
 		};
 
 		// Find existing Biography

@@ -7,7 +7,10 @@ module.exports = function(app) {
 	// Pictures Routes
 	app.route('/api/pictures').all()
 		.get(pictures.list).all(picturesPolicy.isAllowed)
-		.post(pictures.create);
+		.post(pictures.uploadImage);
+
+	app.route('/api/pictures/download/:pictureGridFsId').all(picturesPolicy.isAllowed)
+		.get(pictures.findPictureGridFs);
 
 	app.route('/api/pictures/:pictureId').all(picturesPolicy.isAllowed)
 		.get(pictures.read)
@@ -16,4 +19,6 @@ module.exports = function(app) {
 
 	// Finish by binding the Picture middleware
 	app.param('pictureId', pictures.pictureByID);
+	app.param('pictureGridFsId', pictures.pictureGridFsByID);
+
 };

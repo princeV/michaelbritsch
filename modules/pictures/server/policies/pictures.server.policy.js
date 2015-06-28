@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function() {
 		}, {
 			resources: '/api/pictures/:pictureId',
 			permissions: '*'
+		}, {
+			resources: '/api/pictures/download/:pictureGridFsId',
+			permissions: '*'
 		}]
 	}, {
 		roles: ['user'],
@@ -29,6 +32,9 @@ exports.invokeRolesPolicies = function() {
 		}, {
 			resources: '/api/pictures/:pictureId',
 			permissions: ['get']
+		}, {
+			resources: '/api/pictures/download/:pictureGridFsId',
+			permissions: ['get']
 		}]
 	}, {
 		roles: ['guest'],
@@ -37,6 +43,9 @@ exports.invokeRolesPolicies = function() {
 			permissions: ['get']
 		}, {
 			resources: '/api/pictures/:pictureId',
+			permissions: ['get']
+		}, {
+			resources: '/api/pictures/download/:pictureGridFsId',
 			permissions: ['get']
 		}]
 	}]);

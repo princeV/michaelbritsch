@@ -1,0 +1,65 @@
+<section data-ng-controller="ContactsController" data-ng-init="findOne()">
+    <div class="page-header">
+        <vn-first-char-strong input-text="Kontaktdaten bearbeiten"></vn-first-char-strong>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" data-ng-submit="update()" novalidate>
+                <fieldset>
+                    <div class="form-group">
+                        <label for="firstName">Vorname</label>
+                        <input type="text" required id="firstName" name="firstName" class="form-control"
+                               data-ng-model="contact.firstName" placeholder="Vorname">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nachname</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control"
+                               data-ng-model="contact.lastName" placeholder="Nachname">
+                    </div>
+                    <div class="form-group">
+                        <label for="street">Strasse</label>
+                        <input type="text" required id="street" name="street" class="form-control"
+                               data-ng-model="contact.street" placeholder="Strasse">
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">PLZ</label>
+                        <input type="text" required id="postalCode" name="postalCode" class="form-control"
+                               data-ng-model="contact.postalCode" placeholder="PLZ">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Stadt</label>
+                        <input type="text" required id="city" name="city" class="form-control"
+                               data-ng-model="contact.city" placeholder="Stadt">
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Telefon</label>
+                        <input type="text" required id="telephone" name="telephone" class="form-control"
+                               data-ng-model="contact.telephone" placeholder="Telefon">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobiltelefon</label>
+                        <input type="text" required id="mobile" name="mobile" class="form-control"
+                               data-ng-model="contact.mobile" placeholder="Mobiltelefon">
+                    </div>
+                    <div class="form-group">
+                        <label for="fax">Fax</label>
+                        <input type="text" required id="fax" name="fax" class="form-control"
+                               data-ng-model="contact.fax" placeholder="Fax">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" data-ng-model="contact.email"
+                               placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-default">
+                    </div>
+                    <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>

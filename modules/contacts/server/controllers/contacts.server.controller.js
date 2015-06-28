@@ -13,6 +13,93 @@ var _ = require('lodash'),
     async = require('async'),
     errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+
+/**
+ * Create a Contact
+ */
+exports.create = function (req, res) {
+    var contact = new Contact(req.body);
+    contact.user = req.user;
+    contact.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(contact);
+        }
+    });
+};
+
+/**
+ * Contact middleware
+ */
+exports.contactById = function (req, res, next, id) {
+    Contact.findById(id).populate('user', 'displayName').exec(function (err, contact) {
+        if (err) return next(err);
+        if (!contact) return next(new Error('Failed to load Contact ' + id));
+        req.contact = contact;
+        next();
+    });
+};
+
+/*
+ * Show the current Contact
+ */
+exports.read = function (req, res) {
+    res.jsonp(req.contact);
+};
+
+/**
+ * Delete a Contact
+ */
+exports.delete = function (req, res) {
+    var contact = req.contact;
+
+    contact.remove(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(contact);
+        }
+    });
+};
+
+/**
+ * Update a Contact
+ */
+exports.update = function (req, res) {
+    var contact = req.contact;
+    contact = _.extend(contact, req.body);
+    contact.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(contact);
+        }
+    });
+};
+
+/**
+ * List all Contacts
+ */
+exports.list = function (req, res) {
+    Contact.find().sort('-created').populate('user', 'displayName').exec(function (err, contacts) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(contacts);
+        }
+    });
+};
+
+
 /**
  * send contact form
  */
@@ -57,8 +144,4 @@ exports.sendEmailHtml = function (req, res, next) {
             });
         }
     });
-};
-
-exports.getContact = function (emailHTML, user, done) {
-    console.log('test');
 };

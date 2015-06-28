@@ -1,21 +1,27 @@
 <section data-ng-controller="AppointmentsController" data-ng-init="find()">
     <div class="page-header">
-        <h2><strong>R</strong>eferenzen</h2>
+        <vn-first-char-strong input-text="Referenzen"></vn-first-char-strong>
     </div>
     <div class="list-group">
         <a data-ng-repeat="appointment in appointments" data-ng-href="/#!/appointments/{{appointment._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-                <span data-ng-bind="appointment.user.displayName"></span>:
-				<span data-ng-bind="appointment.created | date:'dd.MM.yyyy - HH:mm'"></span>
-
-			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="appointment.name"></h4>
             <h5 class="list-group-item-heading" data-ng-bind="appointment.description"></h5>
             <h5 class="list-group-item-heading" data-ng-bind="appointment.location"></h5>
             <h5 class="list-group-item-heading" data-ng-bind="appointment.date | date:'dd.MM.yyyy' "></h5>
+
+            <small class="list-group-item-text">
+                Diese Referenz wurde am
+                <span data-ng-bind="appointment.created | date:'dd.MM.yyyy'"></span>
+                um
+                <span data-ng-bind="appointment.created | date:'HH:mm'"></span>
+                Uhr von
+                <span data-ng-bind="appointment.user.displayName"></span>
+                erstellt.
+            </small>
+
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!appointments.$resolved || appointments.length">
-    	No Appointments yet, why don't you <a href="/#!/appointments/create">create one</a>?
+        Es ist noch keine Referenz vorhanden -  <a href="/#!/appointments/create">Referenz anlegen</a>?
     </div>
 </section>

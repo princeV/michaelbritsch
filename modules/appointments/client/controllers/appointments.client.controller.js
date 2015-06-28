@@ -14,9 +14,6 @@ angular.module('appointments').controller('AppointmentsController', ['$scope', '
 				location: this.location,
 				date: this.date
 			});
-			console.log(appointment);
-			console.log(this);
-
 			// Redirect after save
 			appointment.$save(function(response) {
 				$location.path('appointments/' + response._id);

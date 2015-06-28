@@ -7,13 +7,11 @@
         <div data-ng-repeat="picture in pictures" class="list-group-item">
 
             <div class="media">
-                <a class="pull-left" data-ng-href="{{picture.linkToHost}}" target="_blank">
-                    <img class="media-object img-rounded" data-ng-src={{getSourceBySize('Square',picture)}}>
+                <a class="pull-left">
+                    <img class="media-object img-rounded" data-ng-src={{getSourceBySize('square',picture)}}>
                 </a>
-
-                <h4 class="media-heading" data-ng-bind="picture.name">Media heading</h4>
+                <h4 class="media-heading" data-ng-bind="picture.name"></h4>
                 <h5 data-ng-bind="picture.description"></h5>
-
             </div>
 
 
@@ -25,15 +23,26 @@
                     <i class="glyphicon glyphicon-trash"></i>
                 </a>
             </div>
-
             <br/>
 
             <small class="list-group-item-text">
-                <span data-ng-bind="picture.user.displayName"></span>:
-                <span data-ng-bind="picture.created | date:'dd.MM.yyyy - HH:mm'"></span>
+                Das Bild wurde am
+                <span data-ng-bind="picture.created | date:'dd.MM.yyyy'"></span>
+                um
+                <span data-ng-bind="picture.created | date:'HH:mm'"></span>
+                Uhr von
+                <span data-ng-bind="picture.user.displayName"></span>
+                erstellt.
             </small>
         </div>
     </div>
 
+    <div data-ng-show="error" class="text-danger">
+        <strong data-ng-bind="error"></strong>
+    </div>
+
+    <div class="alert alert-warning text-center" data-ng-hide="!pictures.$resolved || pictures.length">
+        Es ist noch kein Bild vorhanden -  <a href="/#!/pictures/create">Bild anlegen</a>?
+    </div>
 
 </section>

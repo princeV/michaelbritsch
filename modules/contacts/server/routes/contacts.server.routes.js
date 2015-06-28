@@ -5,7 +5,19 @@ module.exports = function(app) {
 	var contactsPolicy = require('../policies/contacts.server.policy');
 
 	// Contacts Routes
-	app.route('/api/contact').all()
-		.get(contacts.getContact).all(contactsPolicy.isAllowed)
+	app.route('/api/contacts').all(contactsPolicy.isAllowed)
+		.get(contacts.list)
+		.post(contacts.create);
+
+	app.route('/api/contacts/:contactId').all(contactsPolicy.isAllowed)
+		.get(contacts.read)
+		.put(contacts.update)
+		.delete(contacts.delete);
+
+	app.route('/api/contactform/send')
 		.post(contacts.sendEmailHtml);
+
+	// Finish by binding the Contact middleware
+	app.param('contactId', contacts.contactById);
+
 };

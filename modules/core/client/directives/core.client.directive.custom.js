@@ -3,20 +3,27 @@
  */
 'use strict';
 
-angular.module('core').directive('vnFirstStrong', function($window) {
-    return{
+angular.module('vnHelper', []).directive('vnFirstCharStrong', function ($window) {
+    return {
         restrict: 'E',
         scope: {
             inputText: '@'
         },
-        template: '<h2><strong>{{firstChar}}</strong>{{remainingChars}}</h2>',
-        link: function(scope, elem, attrs){
-
-                scope.inputText = attrs.inputText;
-                scope.firstChar = attrs.inputText.charAt(0);
-                scope.remainingChars = attrs.inputText.substring(1);
-            console.log(scope);
-
+        transclude: true,
+        template: '<h2><strong>{{firstChar}}</strong>{{remainingChars}}</h2>' +
+        '<ng-transclude></ng-transclude>',
+        link: function (scope, elem, attrs) {
+            // observe to get the value once its available
+            attrs.$observe('inputText', function (value) {
+                    if (value !== undefined) {
+                        scope.firstChar = value.charAt(0);
+                        scope.remainingChars = value.substring(1);
+                    }
+                }
+            )
+            ;
         }
-    };
-});
+    }
+        ;
+})
+;

@@ -18,14 +18,14 @@ angular.module('users').config(['$stateProvider',
 				url: '/password',
 				templateUrl: 'modules/users/views/settings/change-password.client.view.html'
 			}).
-			state('settings.accounts', {
+			/*state('settings.accounts', {
 				url: '/accounts',
 				templateUrl: 'modules/users/views/settings/manage-social-accounts.client.view.html'
-			}).
-			state('settings.picture', {
+			}).*/
+			/*state('settings.picture', {
 				url: '/picture',
 				templateUrl: 'modules/users/views/settings/change-profile-picture.client.view.html'
-			}).
+			}).*/
 			state('authentication', {
 				abstract: true,
 				url: '/authentication',
@@ -64,10 +64,11 @@ angular.module('users').config(['$stateProvider',
 			state('password.reset.form', {
 				url: '/:token',
 				templateUrl: 'modules/users/views/password/reset-password.client.view.html'
-			}).
-			state('settings.admin', {
-				url: '/admin',
-				templateUrl: 'modules/users/views/settings/edit-user-roles.client.view.html'
-			});
+			})
+			//.state('settings.admin', {
+			//	url: '/admin',
+			//	templateUrl: 'modules/users/views/settings/edit-user-roles.client.view.html'
+			//	})
+		;
 	}
 ]);

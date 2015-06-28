@@ -7,23 +7,23 @@ angular.module('biographies').config(['$stateProvider',
 		$stateProvider.
 		state('biographies', {
 			abstract: true,
-			url: '/biographies',
+			url: '/biografie',
 			template: '<ui-view/>'
 		}).
-		state('biographies.list', {
-			url: '',
-			templateUrl: 'modules/biographies/views/list-biographies.client.view.html'
-		}).
+		//state('biographies.list', {
+		//	url: '',
+		//	templateUrl: 'modules/biographies/views/list-biographies.client.view.html'
+		//}).
 		state('biographies.create', {
-			url: '/create',
+			url: '/anlegen',
 			templateUrl: 'modules/biographies/views/create-biography.client.view.html'
 		}).
 		state('biographies.view', {
-			url: '/view',
+			url: '',
 			templateUrl: 'modules/biographies/views/view-biography.client.view.html'
 		}).
 		state('biographies.edit', {
-			url: '/:biographyId/edit',
+			url: '/:biographyId/bearbeiten',
 			templateUrl: 'modules/biographies/views/edit-biography.client.view.html'
 		});
 	}

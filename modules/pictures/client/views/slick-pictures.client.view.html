@@ -1,27 +1,47 @@
 <section data-ng-controller="PicturesController" data-ng-init="find()">
 
-    <br />
-    <!-- Carousel  -->
-    <slick class="slider-for" slides-to-show=1 slides-to-scroll=1 arrows="false" as-nav-for=".slider-nav"
-           init-onload=true data="slides">
-        <div ng-repeat="picture in pictures" class="slick-slide-vn">
-           <!-- <div class="page-header">
-                <h2>{{picture.name}} <small>{{picture.description}}</small></h2>
-            </div>
-            -->
-            <a data-ng-href="{{picture.linkToHost}}" target="_blank">
-                <img ng-src={{getSourceBySize('Large',picture)}}>
-            </a>
-        </div>
-    </slick>
+    <div data-ng-show="!pictures.$resolved || pictures.length">
+        <br/>
+        <!-- Carousel  -->
 
-    <slick class="slider-nav" slides-to-show=3 slides-to-scroll=1 as-nav-for=".slider-for" dots="true"
-           center-mode="true" focus-on-select="true" init-onload=true data="slides">
-        <div ng-repeat="picture in pictures">
-            <img ng-src={{getSourceBySize('Square',picture)}}>
+        <slick class="slider-for" current-index="slick.current" slides-to-show=1
+               slides-to-scroll=1 init-onload=true data="pictures">
+            <div ng-repeat="picture in pictures" class="slick-slide-vn">
+                <a href="{{getSourceBySize('large',picture)}}" target="_blank">
+                    <img data-ng-src={{getSourceBySize('large',picture)}}>
+                </a>
+            </div>
+        </slick>
+
+        <div class="list-group">
+            <div class="list-group-item vn-box-shadow">
+                <h3 class="vn-no-margin"><strong>{{pictures[slick.current].name}}</strong><br/>
+                    <small> {{pictures[slick.current].description}}</small>
+                </h3>
+            </div>
         </div>
-    </slick>
-    <br/>
+        <div class="row">
+            <div data-ng-repeat="picture in pictures">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="thumbnail vn-no-border vn-href-hash">
+                        <div class="media" data-ng-click="slick.goto($index)">
+                            <div class="pull-left">
+                                <img class="media-object img-rounded" data-ng-src={{getSourceBySize('square',picture)}}>
+                            </div>
+                            <h4 class="media-heading" data-ng-bind="picture.name"></h4>
+                            <h5>{{ picture.description | limitTo: 30 }}{{picture.description.length > 30 ? '...' :
+                                ''}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div data-ng-hide="!pictures.$resolved || pictures.length">
+        <vn-first-char-strong input-text="Es ist noch kein Bild vorhanden."></vn-first-char-strong>
+    </div>
 
     <div data-ng-show="authentication.user.roles.indexOf('admin') > -1">
         <hr>
@@ -34,6 +54,7 @@
             </a>
         </div>
     </div>
+
 </section>
 
 

@@ -1,6 +1,6 @@
 <section data-ng-controller="BiographiesController">
     <div class="page-header">
-        <h1>New Biography</h1>
+        <vn-first-char-strong input-text="Biografie anlegen"></vn-first-char-strong>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
@@ -12,12 +12,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="htmlContent">Content</label>
+                    <label class="control-label" for="htmlContent">Inhalt</label>
                     <div class="controls">
                         <text-angular data-ng-model="htmlContent" id="htmlContent" ta-text-editor-class="form-content" ta-html-editor-class="form-content">
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">

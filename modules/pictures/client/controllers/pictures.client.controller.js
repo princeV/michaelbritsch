@@ -4,152 +4,41 @@
 angular.module('pictures').controller('PicturesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Pictures', '$http',
     function ($scope, $stateParams, $location, Authentication, Pictures, $http) {
         $scope.authentication = Authentication;
-        $scope.picture = null;
-        $scope.flickrPictureId = 0;
-        $scope.linkToHost = '';
-        $scope.flickrSuccess = true;
         $scope.sizes = [];
+
+
+        $scope.setPictureIndex = function (index) {
+            $scope.pictureIndex = index;
+        };
+
+        $scope.slick = {
+            current: 0,
+            init: function (index) {
+                this.current = index;
+            },
+            goto: function (index) {
+                this.current = index;
+            },
+            next: function (index) {
+                this.current++;
+            },
+            prev: function (index) {
+                this.current--;
+            },
+            onBeforeChange: function () {
+            },
+            onAfterChange: function () {
+            }
+        };
+
 
         // function that returns the source of the picture in the required size
         $scope.getSourceBySize = function (sizeLabel, picture) {
-
             for (var key in picture.sizes) {
                 if (picture.sizes[key].label === sizeLabel) {
                     return picture.sizes[key].source;
                 }
             }
-        };
-
-        $scope.fetchFlickrData = function () {
-            // set the linkToHost to the current picture linkToHost in case of an update
-            if ($scope.picture !== null) {
-                $scope.linkToHost = $scope.picture.linkToHost;
-            }
-
-            //initialize variables:
-            $scope.flickrSuccess = true;
-            $scope.error = '';
-            $scope.flickrSquareIsAvailable = false;
-            $scope.flickrSmallIsAvailable = false;
-            $scope.flickrMediumIsAvailable = false;
-            $scope.flickrLargeIsAvailable = false;
-            $scope.flickrOriginalIsAvailable = false;
-            $scope.sizes = [];
-
-            //check the flickr bbcode
-            var flickrPictureId = checkFlickrBBcode($scope.linkToHost);
-            var host = 'https://api.flickr.com';
-            var path = '/services/rest/';
-            var method = 'flickr.photos.getSizes';
-            var apiKey = 'e52b35ac4e8f7389ec81840ff2497704';
-            var format = 'json&nojsoncallback=1';
-            var fullUrl = host.concat(path, '?method=', method, '&api_key=', apiKey, '&photo_id=', flickrPictureId, '&format=', format);
-
-            // Simple GET request example :
-            $http.get(fullUrl).
-                success(function (data, status) {
-                    //console.log('http.get.success');
-                    //console.log($scope.flickrSuccess);
-                    if (data.stat === 'ok') {
-                        var index = 0;
-                        for (index = 0; index < data.sizes.size.length; index++) {
-                            //add the required fields to the picture object
-                            $scope.sizes.push(
-                                {
-                                    label: data.sizes.size[index].label,
-                                    source: data.sizes.size[index].source,
-                                    width: data.sizes.size[index].width,
-                                    height: data.sizes.size[index].height
-                                }
-                            );
-
-                            //check for images and set them to $scope vars:
-                            switch (data.sizes.size[index].label) {
-                                case 'Square':
-                                    $scope.flickrSquareSource = data.sizes.size[index].source;
-                                    if ($scope.flickrSquareSource !== '') {
-                                        $scope.flickrSquareIsAvailable = true;
-                                    }
-                                    break;
-                                case 'Small':
-                                    $scope.flickrSmallSource = data.sizes.size[index].source;
-                                    if ($scope.flickrSmallSource !== '') {
-                                        $scope.flickrSmallIsAvailable = true;
-                                    }
-                                    break;
-                                case 'Medium 640':
-                                    $scope.flickrMediumSource = data.sizes.size[index].source;
-                                    if ($scope.flickrMediumSource !== '') {
-                                        $scope.flickrMediumIsAvailable = true;
-                                    }
-                                    break;
-                                case 'Large':
-                                    $scope.flickrLargeSource = data.sizes.size[index].source;
-                                    if ($scope.flickrLargeSource !== '') {
-                                        $scope.flickrLargeIsAvailable = true;
-                                    }
-                                    break;
-                                case 'Original':
-                                    $scope.flickrOriginalSource = data.sizes.size[index].source;
-                                    if ($scope.flickrOriginalSource !== '') {
-                                        $scope.flickrOriginalIsAvailable = true;
-                                    }
-                                    break;
-                            }
-                        }
-                        $scope.flickrSuccess = false;
-                    }
-                    else {
-                        $scope.error = data.message || 'Request failed';
-                    }
-                    //update data and status:
-                    data = null;
-                    status = null;
-                }).
-                error(function (data, status) {
-                    //console.log('http.get.error');
-                    $scope.error = data || 'Request failed';
-                });
-        };
-
-        var checkFlickrBBcode = function (flickrUrl) {
-
-            var flickrUrlId = flickrUrl.replace('https://flic.kr/p/', '');
-            //$scope.linkToHost.replace('https://flic.kr/p/', '');
-
-            var alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
-            var num = flickrUrlId.length;
-            var decoded = 0;
-            var multi = 1;
-            for (var i = (num - 1); i >= 0; i--) {
-                decoded = decoded + multi * alphabet.indexOf(flickrUrlId[i]);
-                multi = multi * alphabet.length;
-            }
-            return decoded;
-
-        };
-
-        // Create new Picture
-        $scope.create = function () {
-            // Create new Picture object
-            // var picture = $scope.picture;
-
-            var picture = new Pictures({
-                name: this.name,
-                description: this.description,
-                linkToHost: this.linkToHost,
-                sizes: $scope.sizes
-            });
-
-            // Redirect after save
-            picture.$save(function (response) {
-                $location.path('pictures');
-
-                // Clear form fields
-                $scope.name = '';
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
         };
 
         // Remove existing Picture
@@ -173,11 +62,6 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
         $scope.update = function () {
             var picture = $scope.picture;
 
-
-
-            // Update the sizes of the picture:
-            picture.sizes = $scope.sizes;
-
             picture.$update(function () {
                 $location.path('pictures/list');
             }, function (errorResponse) {
@@ -187,31 +71,10 @@ angular.module('pictures').controller('PicturesController', ['$scope', '$statePa
 
         // Find a list of Pictures
         $scope.find = function () {
-            $scope.pictures = Pictures.query(initializeSlides);
-        };
-
-        var initializeSlides = function (pictureResults) {
-            var slides = $scope.slides = [];
-            var i;
-            var j;
-            for (i = 0; i < $scope.pictures.length; i++) {
-                var slideAttributes = [];
-                slideAttributes.name = $scope.pictures[i].name;
-
-                for (j = 0; j < $scope.pictures[i].sizes.length; j++) {
-                    var text = $scope.pictures[i].description;
-                    if ($scope.pictures[i].sizes[j].label === 'Large') {
-                        slideAttributes.largeImg = $scope.pictures[i].sizes[j].source;
-                    }
-                    else if ($scope.pictures[i].sizes[j].label === 'Medium 640') {
-                        slideAttributes.mediumImg = $scope.pictures[i].sizes[j].source;
-                    }
-                    else if ($scope.pictures[i].sizes[j].label === 'Square') {
-                        slideAttributes.squareImg = $scope.pictures[i].sizes[j].source;
-                    }
-                }
-                slides.push(slideAttributes);
-            }
+            // use the callback to make sure slick init-onload=true with data="pictures" is working properly
+            Pictures.query(function (pictureResults) {
+                $scope.pictures = pictureResults;
+            });
         };
 
 

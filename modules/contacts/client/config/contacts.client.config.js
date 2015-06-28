@@ -10,7 +10,7 @@ angular.module('contacts').run(['Menus',
         Menus.addMenuItem('topbar', {
             title: 'Kontakt',
             isPublic: true,
-            state: 'contact',
+            state: 'contact.view',
             position: 4
         });
     }

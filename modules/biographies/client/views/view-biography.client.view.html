@@ -1,6 +1,6 @@
-<section data-ng-controller="BiographiesController" data-ng-init="find()">
+<section data-ng-controller="BiographiesController" data-ng-init="findFirst()">
     <div class="page-header">
-        <h2 data-ng-bind="biography.name"></h2>
+        <vn-first-char-strong input-text="{{biography.name}}"></vn-first-char-strong>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -9,20 +9,28 @@
     </div>
 
     <hr>
-    <div class="pull-right" data-ng-show="authentication.user.roles.indexOf('admin') > -1">
-        <a class="btn btn-primary" href="/#!/biographies/{{biography._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary" data-ng-click="remove();">
-            <i class="glyphicon glyphicon-trash"></i>
-        </a>
+    <div data-ng-show="authentication.user.roles.indexOf('admin') > -1">
+        <div class="pull-right" data-ng-show="!biographies.$resolved || biographies.length">
+            <a class="btn btn-primary" href="/#!/biografie/{{biography._id}}/bearbeiten">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-primary" data-ng-click="remove();">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </div>
+        <div class="alert alert-warning text-center" data-ng-hide="!biographies.$resolved || biographies.length">
+            Es ist noch keine Biografie vorhanden: <a href="/#!/biografie/anlegen">Biografie anlegen</a>?
+        </div>
     </div>
     <small>
-        <em class="text-muted">
-            Updated on
-            <span data-ng-bind="biography.changed | date:'medium'"></span>
-            by
+        <em class="text-muted" data-ng-show="!biographies.$resolved || biographies.length">
+            Zuletzt ge&auml;ndert von
             <span data-ng-bind="biography.user.displayName"></span>
+            am
+            <span data-ng-bind="biography.changed | date:'dd.MM.yyyy'"></span>
+            um
+            <span data-ng-bind="biography.changed | date:'HH:mm'"></span>
+            Uhr
         </em>
     </small>
 </section>

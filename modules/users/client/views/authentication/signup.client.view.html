@@ -1,17 +1,17 @@
 <div data-ng-controller="AuthenticationController">
-	<h3 class="col-md-12 text-center">Or sign up using your email</h3>
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+	<h3 class="col-md-12 text-center">Neu anmelden</h3>
+	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-3">
 		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
 			<fieldset>
 				<div class="form-group">
-					<label for="firstName">First Name</label>
+					<label for="firstName">Vorname</label>
 					<input type="text" required id="firstName" name="firstName" class="form-control"
-						   data-ng-model="credentials.firstName" placeholder="First Name">
+						   data-ng-model="credentials.firstName" placeholder="Vorname">
 				</div>
 				<div class="form-group">
-					<label for="lastName">Last Name</label>
+					<label for="lastName">Nachname</label>
 					<input type="text" id="lastName" name="lastName" class="form-control"
-						   data-ng-model="credentials.lastName" placeholder="Last Name">
+						   data-ng-model="credentials.lastName" placeholder="Nachname">
 				</div>
 				<div class="form-group">
 					<label for="email">Email</label>
@@ -19,19 +19,19 @@
 						   placeholder="Email">
 				</div>
 				<div class="form-group">
-					<label for="username">Username</label>
+					<label for="username">Benutzername</label>
 					<input type="text" id="username" name="username" class="form-control"
-						   data-ng-model="credentials.username" placeholder="Username">
+						   data-ng-model="credentials.username" placeholder="Benutzername">
 				</div>
 				<div class="form-group">
-					<label for="password">Password</label>
+					<label for="password">Passwort</label>
 					<input type="password" id="password" name="password" class="form-control"
-						   data-ng-model="credentials.password" placeholder="Password">
+						   data-ng-model="credentials.password" placeholder="Passwort">
 				</div>
 				<div class="text-center form-group">
-					<button type="submit" class="btn btn-large btn-primary">Sign up</button>
-					&nbsp; or&nbsp;
-					<a data-ui-sref="authentication.signin" class="show-signup">Sign in</a>
+					<button type="submit" class="btn btn-large btn-primary">Neu anmelden</button>
+					&nbsp; oder&nbsp;
+					<a data-ui-sref="authentication.signin" class="show-signup">Einloggen</a>
 				</div>
 				<div data-ng-show="error" class="text-center text-danger">
 					<strong data-ng-bind="error"></strong>
